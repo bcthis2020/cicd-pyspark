@@ -20,4 +20,4 @@ steps:
   dir: 'cicd-pyspark'
   id: 'cicd-newjob-bucket'
 - name: gcr.io/cloud-builders/gcloud
-  args: ['dataproc','jobs', 'submit', 'pyspark','--py-files', 'gs://cicd-files/pyspark-job-new.py', '--cluster','cicd-demo-cluster',  '--jars','gs://spark-lib/bigquery/spark-bigquery-latest.jar','--region','us-central1']
+  args: ['dataproc','jobs', 'submit', 'pyspark','gs://cicd-files/pyspark-job-new.py', '--cluster','cicd-demo-cluster',  '--jars','gs://spark-lib/bigquery/spark-bigquery-latest.jar','--region','us-central1']
