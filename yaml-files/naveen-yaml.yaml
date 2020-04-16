@@ -20,7 +20,7 @@ steps:
 #  dir: 'cicd-pyspark'
 #  id: 'cicd-newjob-bucket'
 - name: gcr.io/cloud-builders/gsutil
-  args: ['cp', 'dag.py', 'gs://cicd-files/dag.py']
+  args: ['cp', 'dag.py', 'gs://us-central1-data-pipeline-c-6f117ebe-bucket/new-dag.py']
   dir: 'cicd-pyspark'
   id: 'cicd-copy-day-gsbucket'
 #- name: gcr.io/cloud-builders/gcloud
