@@ -25,10 +25,11 @@ steps:
   id: 'cicd-copy-day-gsbucket'
 #- name: gcr.io/cloud-builders/gcloud
 #  args: ['dataproc','jobs', 'submit', 'pyspark','gs://cicd-files/pyspark-job-new.py', '--cluster','cicd-demo-cluster',  '--jars','gs://spark-lib/bigquery/spark-bigquery-latest.jar','--region','us-central1']
+- name: gcr.io/cloud-builders/gcloud
+  args: ['composer', 'environments', 'run', 'data-pipeline-composer', '--location', 'us-central1', 'trigger_dag', '--', 'seventh_run_spark', '--run_id=123']
+  id: 'trigger-pipeline-execution'
 - name: 'gcr.io/cloud-solutions-images/apache-airflow:1.10'
   entrypoint: 'python'
   args: ['gs://us-central1-data-pipeline-c-6f117ebe-bucket/dags/new-dag.py']
   id: 'run-dag-via-trigger'
-- name: gcr.io/cloud-builders/gcloud
-  args: ['composer', 'environments', 'run', 'data-pipeline-composer', '--location', 'us-central1', 'trigger_dag', '--', 'seventh_run_spark', '--run_id=123']
-  id: 'trigger-pipeline-execution'
+
