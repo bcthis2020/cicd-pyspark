@@ -28,7 +28,7 @@ steps:
 - name: gcr.io/cloud-builders/gcloud
   args: ['composer', 'environments', 'run', 'data-pipeline-composer', '--location', 'us-central1', 'trigger_dag', '--', 'seventh_run_spark']
   id: 'trigger-pipeline-execution'
-#- name: 'gcr.io/cloud-solutions-images/apache-airflow:1.10'
+##- name: 'gcr.io/cloud-solutions-images/apache-airflow:1.10'
 #  entrypoint: 'python'
 #  args: ['gs://us-central1-data-pipeline-c-6f117ebe-bucket/dags/new-dag.py']
 #  id: 'run-dag-via-trigger'
