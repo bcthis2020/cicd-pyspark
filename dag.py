@@ -67,6 +67,7 @@ with models.DAG(
         main=PYSPARK_JOB,
         # Obviously needs to match the name of cluster created in the prior Operator.
         cluster_name='cicd-demo-cluster',
+        region='us-central1',
         dataproc_jars  = 'gs://spark-lib/bigquery/spark-bigquery-latest.jar',
         dataproc_pyspark_jars ='gs://spark-lib/bigquery/spark-bigquery-latest.jar')
 
@@ -76,6 +77,7 @@ with models.DAG(
         main=PYSPARK_JOB,
         # Obviously needs to match the name of cluster created in the prior Operator.
         cluster_name='cicd-demo-cluster',
+        region='us-central1',
         dataproc_jars  = 'gs://spark-lib/bigquery/spark-bigquery-latest.jar',
         dataproc_pyspark_jars ='gs://spark-lib/bigquery/spark-bigquery-latest.jar')
 
