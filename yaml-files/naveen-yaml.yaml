@@ -15,9 +15,18 @@ steps:
 - name: gcr.io/cloud-builders/git
   args: ['clone', 'https://github.com/bcthis2020/cicd-pyspark.git']
   id: 'check-out-source-code'
+#- name: gcr.io/cloud-builders/gsutil
+#  args: ['cp', 'pyspark-job.py', 'gs://cicd-files/pyspark-job-new.py']
+  us-central1-data-pipeline-c-6f117ebe-bucket
+#  dir: 'cicd-pyspark'
+#  id: 'cicd-newjob-bucket'
 - name: gcr.io/cloud-builders/gsutil
-  args: ['cp', 'pyspark-job.py', 'gs://cicd-files/pyspark-job-new.py']
+  args: ['cp', 'dag.py', 'gs://cicd-files/dag.py'
   dir: 'cicd-pyspark'
-  id: 'cicd-newjob-bucket'
-- name: gcr.io/cloud-builders/gcloud
-  args: ['dataproc','jobs', 'submit', 'pyspark','gs://cicd-files/pyspark-job-new.py', '--cluster','cicd-demo-cluster',  '--jars','gs://spark-lib/bigquery/spark-bigquery-latest.jar','--region','us-central1']
+  id: 'cicd-copy-day-gsbucket'
+#- name: gcr.io/cloud-builders/gcloud
+#  args: ['dataproc','jobs', 'submit', 'pyspark','gs://cicd-files/pyspark-job-new.py', '--cluster','cicd-demo-cluster',  '--jars','gs://spark-lib/bigquery/spark-bigquery-latest.jar','--region','us-central1']
+- name: 'gcr.io/cloud-solutions-images/apache-airflow:1.10'
+  entrypoint: 'python'
+  args: ['gs://cicd-files/dag.py']
+  id: 'unit-test-on-operator-code'
