@@ -9,7 +9,7 @@ from airflow.utils import trigger_rule
 
 
 
-BUCKET = models.Variable.get('gcs_bucket')  # GCS bucket with our data.
+BUCKET = models.Variable.get('cicd-files')  # GCS bucket with our data.
 
 
 
@@ -34,7 +34,7 @@ default_dag_args = {
     # If a task fails, retry it once after waiting at least 5 minutes
     'retries': 1,
     'retry_delay': datetime.timedelta(minutes=5),
-    'project_id': models.Variable.get('gcp_project')
+    'project_id': models.Variable.get('zinc-citron-272409')
 }
 
 
@@ -48,15 +48,15 @@ with models.DAG(
 
 
     # Create a Cloud Dataproc cluster.
-    create_dataproc_cluster = dataproc_operator.DataprocClusterCreateOperator(
-        task_id='create_dataproc_cluster',
-        # Give the cluster a unique name by appending the date scheduled.
-        # See https://airflow.apache.org/code.html#default-variables
-        cluster_name='composer-hadoop-tutorial-cluster-{{ ds_nodash }}',
-        num_workers=2,
-        zone=models.Variable.get('gce_zone'),
-        master_machine_type='n1-standard-1',
-        worker_machine_type='n1-standard-1')
+    #create_dataproc_cluster = dataproc_operator.DataprocClusterCreateOperator(
+    #    task_id='create_dataproc_cluster',
+    #    # Give the cluster a unique name by appending the date scheduled.
+    #    # See https://airflow.apache.org/code.html#default-variables
+    #    cluster_name='composer-hadoop-tutorial-cluster-{{ ds_nodash }}',
+    #    num_workers=2,
+    #    zone=models.Variable.get('gce_zone'),
+    #    master_machine_type='n1-standard-1',
+    #    worker_machine_type='n1-standard-1')
 
 
 
@@ -66,7 +66,7 @@ with models.DAG(
         task_id='submit_pyspark1',
         main=PYSPARK_JOB,
         # Obviously needs to match the name of cluster created in the prior Operator.
-        cluster_name='composer-hadoop-tutorial-cluster-{{ ds_nodash }}',
+        cluster_name='cicd-demo-cluster',
         dataproc_jars  = 'gs://spark-lib/bigquery/spark-bigquery-latest.jar',
         dataproc_pyspark_jars ='gs://spark-lib/bigquery/spark-bigquery-latest.jar')
 
@@ -75,7 +75,7 @@ with models.DAG(
         task_id='submit_pyspark2',
         main=PYSPARK_JOB,
         # Obviously needs to match the name of cluster created in the prior Operator.
-        cluster_name='composer-hadoop-tutorial-cluster-{{ ds_nodash }}',
+        cluster_name='cicd-demo-cluster',
         dataproc_jars  = 'gs://spark-lib/bigquery/spark-bigquery-latest.jar',
         dataproc_pyspark_jars ='gs://spark-lib/bigquery/spark-bigquery-latest.jar')
 
