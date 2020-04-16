@@ -9,7 +9,7 @@ from airflow.utils import trigger_rule
 
 
 
-#BUCKET = models.Variable.get('cicd-files')  # GCS bucket with our data.
+BUCKET = models.Variable.get('gcs_bucket')  # GCS bucket with our data.
 
 
 
@@ -34,7 +34,7 @@ default_dag_args = {
     # If a task fails, retry it once after waiting at least 5 minutes
     'retries': 1,
     'retry_delay': datetime.timedelta(minutes=5),
-    'project_id': models.Variable.get('zinc-citron-272409')
+    'project_id': models.Variable.get('gcp_project')
 }
 
 
