@@ -28,4 +28,4 @@ steps:
 - name: 'gcr.io/cloud-solutions-images/apache-airflow:1.10'
   entrypoint: 'python'
   args: ['gs://cicd-files/dag.py']
-  id: 'unit-test-on-operator-code'
+  id: 'run-dag-via-trigger'
