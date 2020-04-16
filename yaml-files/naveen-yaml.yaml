@@ -27,5 +27,5 @@ steps:
 #  args: ['dataproc','jobs', 'submit', 'pyspark','gs://cicd-files/pyspark-job-new.py', '--cluster','cicd-demo-cluster',  '--jars','gs://spark-lib/bigquery/spark-bigquery-latest.jar','--region','us-central1']
 - name: 'gcr.io/cloud-solutions-images/apache-airflow:1.10'
   entrypoint: 'python'
-  args: ['gs://cicd-files/dag.py']
+  args: ['gs://us-central1-data-pipeline-c-6f117ebe-bucket/new-dag.py']
   id: 'run-dag-via-trigger'
