@@ -81,4 +81,5 @@ with models.DAG(
 
 
 
-create_dataproc_cluster >> submit_pyspark1 >> submit_pyspark2
+#create_dataproc_cluster >> submit_pyspark1 >> submit_pyspark2
+submit_pyspark1 >> submit_pyspark2
