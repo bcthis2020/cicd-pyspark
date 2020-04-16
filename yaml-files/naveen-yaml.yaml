@@ -17,7 +17,6 @@ steps:
   id: 'check-out-source-code'
 #- name: gcr.io/cloud-builders/gsutil
 #  args: ['cp', 'pyspark-job.py', 'gs://cicd-files/pyspark-job-new.py']
-  us-central1-data-pipeline-c-6f117ebe-bucket
 #  dir: 'cicd-pyspark'
 #  id: 'cicd-newjob-bucket'
 - name: gcr.io/cloud-builders/gsutil
