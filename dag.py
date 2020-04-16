@@ -9,7 +9,7 @@ from airflow.utils import trigger_rule
 
 
 
-BUCKET = models.Variable.get('gs://cicd-files')  # GCS bucket with our data.
+BUCKET = models.Variable.get('gcp_project')  # GCS bucket with our data.
 
 
 
